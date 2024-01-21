@@ -1,0 +1,29 @@
+{
+  "name": "team-creator",
+  "version": "0.0.1",
+  "description": "create a webpage for a team of employees",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Clive-Makongo/teamCreator.git"
+  },
+  "keywords": [
+    "create",
+    "team"
+  ],
+  "author": "Clive Makong'o",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Clive-Makongo/teamCreator/issues"
+  },
+  "homepage": "https://github.com/Clive-Makongo/teamCreator#readme",
+  "dependencies": {
+    "inquirer": "^9.2.12"
+  }
+}
