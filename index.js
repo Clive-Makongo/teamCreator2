@@ -6,12 +6,15 @@ const path = require("path");
 const fs = require("fs");
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
+console.log(OUTPUT_DIR);
 const outputPath = path.join(OUTPUT_DIR, "team.html");
+console.log(outputPath);
 
 const render = require("./src/page-template.js");
 
 
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
+const team = [];
 
 const manager = [
     {
@@ -32,6 +35,12 @@ const manager = [
         type: `input`,
         name: `managerOffice`,
         message: `What is the Manager's office number?`,
+    },
+    {
+        type: `list`,
+        name: `next`,
+        message: `What would you like to do next?`,
+        choices: [`Add an Engineer`, `Add an Intern`, `Finish building the team`]
     },
 ];
 
@@ -55,6 +64,12 @@ const engineer = [
         name: `engineerGithub`,
         message: `What is the engineer's GitHub Username?`,
     },
+    {
+        type: `list`,
+        name: `next`,
+        message: `What would you like to do next?`,
+        choices: [`Add an Engineer`, `Add an Intern`, `Finish building the team`]
+    },
 ];
 
 const intern = [
@@ -77,6 +92,12 @@ const intern = [
         name: `internSchool`,
         message: `What is the engineer's GitHub Username?`,
     },
+    {
+        type: `list`,
+        name: `next`,
+        message: `What would you like to do next?`,
+        choices: [`Add an Engineer`, `Add an Intern`, `Finish building the team`]
+    },
 ];
 
 const next = [
@@ -88,44 +109,87 @@ const next = [
     },
 ];
 
-const managerPrompt = manager => {
+const managerPrompt = () => {
     inquirer.prompt(manager).then(data => {
-        Manager(data.managerName, data.managerId, data.managerEmail, data.managerOffice);
-    });
-};
+        const managerObj = new Manager(data.managerName, data.managerId, data.managerEmail, data.managerOffice);
 
-const nextPrompt = next => {
-    inquirer.prompt(next).then(data => {
+        team.push(managerObj);
+
         if (data.next === "Add an Engineer") {
             engineerPrompt();
+
+        } else if (data.next === "Add an Intern") {
+           internPrompt();
+
+        } else {
+            writeToFile(team);
+        };
+
+        console.log(`running`);
+    });
+};
+
+// const nextPrompt = () => {
+//     inquirer.prompt(next).then(data => {
+//         if (data.next === "Add an Engineer") {
+//             engineerPrompt(engineer);
+//         } else if (data.next === "Add an Intern") {
+//             internPrompt(intern);
+//         } else {
+//             writeToFile(team);
+//         };
+//     });
+// };
+
+const engineerPrompt = () => {
+    inquirer.prompt(engineer).then(data => {
+        const engineerObj = new Engineer(data.engineerName, data.engineerId, data.engineerEmail, data.engineerGithub);
+
+        team.push(engineerObj);
+
+        if (data.next === "Add an Engineer") {
+            engineerPrompt();
+
         } else if (data.next === "Add an Intern") {
             internPrompt();
+
         } else {
-            // render
-        }
-    });
-};
-
-const engineerPrompt = engineer => {
-    inquirer.prompt(engineer).then(data => {
-        Engineer(data.engineerName, data.engineerrId, data.engineerEmail, data.engineerGithub);
+            writeToFile(team);
+        };
     });
 
-    nextPrompt();
 };
 
-const internPrompt = intern => {
+const internPrompt = () => {
     inquirer.prompt(intern).then(data => {
-        Intern(data.internName, data.engineerId, data.engineerEmail, data.engineerGithub);
+        const internObj = new Intern(data.internName, data.engineerId, data.engineerEmail, data.internSchool);
+
+        team.push(internObj);
+
+        if (data.next === "Add an Engineer") {
+            engineerPrompt();
+
+        } else if (data.next === "Add an Intern") {
+            internPrompt();
+
+        } else {
+            writeToFile(team);
+        };
     });
 
-    nextPrompt();
+};
+
+const writeToFile = team => {
+    fs.writeFile(outputPath, render(team), (err) =>
+        err ? console.error(err) : console.log("Success!")
+    );
 };
 
 function init() {
-
+    console.log(team);
     managerPrompt();
-    nextPrompt();
+    //console.log(team);
 
-    
 };
+
+init();
