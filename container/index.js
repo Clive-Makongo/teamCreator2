@@ -13,3 +13,16 @@ const render = require("./src/page-template.js");
 
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
 
+const questions = [
+    {
+        type: `input`,
+        name: `manager`,
+        message: `What is your Title?`,
+    },
+];
+
+function init() {
+    inquirer.prompt(questions).then(data => ){
+
+    }
+}
