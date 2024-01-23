@@ -52,7 +52,7 @@ const engineer = [
     },
     {
         type: `input`,
-        name: `engineerName`,
+        name: `engineerID`,
         message: `What is the Engineer's Employee ID?`,
     }, {
         type: `input`,
@@ -90,7 +90,7 @@ const intern = [
     {
         type: `input`,
         name: `internSchool`,
-        message: `What is the engineer's GitHub Username?`,
+        message: `What is the interns's School?`,
     },
     {
         type: `list`,
@@ -162,7 +162,7 @@ const engineerPrompt = () => {
 
 const internPrompt = () => {
     inquirer.prompt(intern).then(data => {
-        const internObj = new Intern(data.internName, data.engineerId, data.engineerEmail, data.internSchool);
+        const internObj = new Intern(data.internName, data.engineerId, data.internEmail, data.internSchool);
 
         team.push(internObj);
 
