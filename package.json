@@ -1,0 +1,26 @@
+{
+  "name": "teamcreator2",
+  "version": "0.0.1",
+  "description": "Create a Team HTML page",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Clive-Makongo/teamCreator2.git"
+  },
+  "keywords": [
+    "team",
+    "create"
+  ],
+  "author": "Clive Makong'o",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Clive-Makongo/teamCreator2/issues"
+  },
+  "homepage": "https://github.com/Clive-Makongo/teamCreator2#readme",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
