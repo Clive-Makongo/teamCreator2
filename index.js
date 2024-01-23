@@ -189,7 +189,6 @@ function init() {
     console.log(team);
     managerPrompt();
     //console.log(team);
-
 };
 
 init();
